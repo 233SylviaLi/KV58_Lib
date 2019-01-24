@@ -131,7 +131,7 @@ void LPTMR_delay_ms(uint16 ms)
                     //| LPTMR_CSR_TFC_MASK      //0:计数值等于比较值就复位；1：溢出复位（注释表示0）
                     );
 
-    while (!(((LPTMR0)->CMR) & LPTMR_CSR_TCF_MASK)); //等待比较值与计数值相等，即时间到了
+    while (!(((LPTMR0)->CSR) & LPTMR_CSR_TCF_MASK)); //等待比较值与计数值相等，即时间到了
 
     ((LPTMR0)->CSR) &= ~LPTMR_CSR_TEN_MASK;          //清除比较标志位
 
@@ -329,7 +329,7 @@ uint32 LPTMR_time_get_ms(void)
     }
     else
     {
-        data = ((LPTMR0)->CSR);                  //返回计时时间(此值最大为 0xffff)注意这里计时时间是CSR而计数是CNR
+        data = ((LPTMR0)->CNR);                  //返回计时时间(此值最大为 0xffff)
     }
 
     return data;
